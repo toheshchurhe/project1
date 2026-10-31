@@ -1,0 +1,146 @@
+/* ==============================================================
+   Simplified GST Return Portal - Stylesheet
+   Designed for Indian Small Businesses & Dukaandars
+   ============================================================== */
+
+:root {
+  --portal-navy: #003366;
+  --portal-dark: #002244;
+  --portal-light: #0B4684;
+  --portal-saffron: #FF9933;
+  --portal-green: #10B981;
+  --portal-emerald: #059669;
+  --portal-slate-bg: #F8FAFC;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #F8FAFC;
+  color: #1E293B;
+}
+
+/* Indian Tricolor Stripe */
+.tiranga-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%, #138808 100%);
+}
+
+/* Tooltip custom styling */
+.tooltip-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tooltip-box {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 60;
+  width: 260px;
+  background-color: #0F172A;
+  color: #FFFFFF;
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 1.4;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.tooltip-box::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #0F172A transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-box,
+.tooltip-container:focus-within .tooltip-box {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Dukaandar Helper Callouts */
+.dukaandar-tip {
+  background: linear-gradient(135deg, #FEF3C7 0%, #FFFBEB 100%);
+  border-left: 4px solid #F59E0B;
+}
+
+/* 8-Step Wizard Stepper */
+.wizard-step {
+  transition: all 0.2s ease;
+}
+
+.wizard-step.active {
+  border-color: #003366;
+  background-color: #EFF6FF;
+}
+
+.wizard-step.completed {
+  border-color: #10B981;
+  background-color: #ECFDF5;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Print Styles for Form GSTR-3B Summary and Official ARN Receipt */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-receipt-modal, 
+  #printable-receipt-modal *,
+  #printable-preview-modal,
+  #printable-preview-modal * {
+    visibility: visible;
+  }
+  #printable-receipt-modal,
+  #printable-preview-modal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

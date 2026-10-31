@@ -1,0 +1,116 @@
+/* Custom Indian GST Portal Theme Enhancements */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans:wght@400;600;700&display=swap');
+
+:root {
+  --gst-navy: #003366;
+  --gst-navy-dark: #002244;
+  --gst-navy-light: #0B4684;
+  --gst-accent: #E58300;
+  --gst-saffron: #FF9933;
+  --gst-green: #138808;
+  --gst-blue-bg: #F0F5FA;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #F8FAFC;
+  color: #1E293B;
+}
+
+/* Indian Tricolor Stripe */
+.tiranga-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%, #138808 100%);
+}
+
+/* Custom Scrollbar for tables and lists */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Tab & Navigation Transitions */
+.nav-link-active {
+  background-color: #002244 !important;
+  color: #FFFFFF !important;
+  border-bottom: 3px solid #FF9933;
+}
+
+/* Pulse animation for live alerts */
+@keyframes softPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.live-pulse {
+  animation: softPulse 2s infinite ease-in-out;
+}
+
+/* Marquee continuous scroll */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 30s linear infinite;
+}
+.marquee-text:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+/* Input focus ring */
+.gst-input:focus {
+  border-color: #003366;
+  box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.15);
+}
+
+/* Status Badges */
+.badge-filed {
+  background-color: #DCFCE7;
+  color: #15803D;
+  border: 1px solid #86EFAC;
+}
+.badge-pending {
+  background-color: #FEF3C7;
+  color: #B45309;
+  border: 1px solid #FCD34D;
+}
+.badge-ready {
+  background-color: #DBEAFE;
+  color: #1D4ED8;
+  border: 1px solid #93C5FD;
+}
+
+/* Print Styles for PDF / Statement Preview */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #statement-print-area, #statement-print-area * {
+    visibility: visible;
+  }
+  #statement-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

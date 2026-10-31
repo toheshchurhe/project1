@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GST Return Portal | Simplified Small Business & Dukaandar Filing</title>
+  <meta name="description" content="Simplified Indian GST Return Portal tailored specifically for small business owners, retailers, and shopkeepers (dukaandars). File GSTR-1 and GSTR-3B with ease.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gst: {
+              navy: '#003366',
+              dark: '#002244',
+              light: '#0B4684',
+              saffron: '#FF9933',
+              green: '#10B981',
+              emerald: '#059669',
+              surface: '#F8FAFC',
+              border: '#E2E8F0'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmTFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Custom Portal Styles -->
+  <link rel="stylesheet" href="css/portal.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-amber-100 selection:text-slate-900">
+
+  <!-- ================= TOP TRICOLOR BAR ================= -->
+  <div class="tiranga-stripe w-full"></div>
+
+  <!-- ================= GOVT UTILITY TOP BAR ================= -->
+  <header class="bg-white border-b border-slate-200 text-xs text-slate-600 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-3">
+      <!-- Left Govt branding -->
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center space-x-1.5 font-semibold text-slate-800">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block animate-pulse"></span>
+          <span>भारत सरकार | Government of India</span>
+        </span>
+        <span class="text-slate-300">|</span>
+        <span class="font-medium text-gst-navy hidden sm:inline">Goods & Services Tax Network (GSTN)</span>
+      </div>
+
+      <!-- Right Utility Links -->
+      <div class="flex items-center space-x-4">
+        <a href="index.html" class="inline-flex items-center space-x-1.5 text-gst-navy hover:text-gst-light font-bold hover:underline transition">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back to Main GST Portal</span>
+        </a>
+        <span class="text-slate-300">|</span>
+        <span class="hidden md:inline-flex items-center text-slate-500">
+          <i class="fa-solid fa-headset mr-1 text-amber-600"></i>Dukaandar Helpline: 1800-103-4786
+        </span>
+        <span class="bg-amber-100 text-amber-900 text-[11px] font-bold px-2 py-0.5 rounded border border-amber-300">
+          सरल रिटर्न पोर्टल
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= PORTAL LOGO & NAV HEADER ================= -->
+  <nav class="bg-gst-navy text-white shadow-md sticky top-0 z-40 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Brand Logo / Title -->
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center text-slate-900 font-black text-xl shadow-inner border border-amber-300">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-base sm:text-lg font-extrabold tracking-tight">GST Return Portal</h1>
+            <span class="bg-emerald-500 text-white text-[10px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider">
+              Dukaandar Edition
+            </span>
+          </div>
+          <p class="text-xs text-slate-300 hidden sm:block">Simplified Tax Compliance for Small Business Owners & Retailers</p>
+        </div>
+      </div>
+
+      <!-- User Logged-in Summary Bar (Visible only when logged in) -->
+      <div id="top-user-bar" class="hidden flex items-center space-x-3">
+        <div class="text-right hidden sm:block">
+          <div class="text-xs font-bold text-white display-trade-name">Apex Mobile Accessories</div>
+          <div class="text-[11px] font-mono text-amber-300 display-gstin">27ABCDE1234F1Z5</div>
+        </div>
+        <button onclick="handleLogout()" class="px-3 py-1.5 bg-white/10 hover:bg-rose-600 text-white text-xs font-semibold rounded transition flex items-center space-x-1.5 border border-white/20">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ================= MAIN CONTENT WRAPPER ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- ========================================================== -->
+    <!-- 1. USER AUTHENTICATION (LOGIN PAGE)                        -->
+    <!-- ========================================================== -->
+    <section id="login-view-section" class="max-w-lg mx-auto my-6 animate-fade-in">
+      
+      <!-- Card Container -->
+      <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+        
+        <!-- Top banner with Indian gradient -->
+        <div class="bg-gradient-to-r from-gst-navy via-gst-light to-gst-navy text-white p-6 text-center relative">
+          <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl mx-auto flex items-center justify-center text-amber-400 text-2xl mb-3 border border-white/20 shadow-sm">
+            <i class="fa-solid fa-store"></i>
+          </div>
+          <h2 class="text-xl font-extrabold">Dukaandar GST Portal Login</h2>
+          <p class="text-xs text-slate-200 mt-1">Sign in to file your GSTR-1 and GSTR-3B returns easily</p>
+          <div class="inline-block mt-3 bg-amber-400/20 text-amber-300 text-[11px] font-semibold px-3 py-1 rounded-full border border-amber-400/30">
+            <i class="fa-solid fa-shield-halved mr-1"></i>Official 256-Bit Encrypted Taxpayer Session
+          </div>
+        </div>
+
+        <!-- Form Content -->
+        <div class="p-6 sm:p-8 space-y-5">
+
+          <!-- 1-Click Demo Fill for Dukaandar -->
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 flex items-center justify-between gap-3 text-xs">
+            <div class="text-amber-900">
+              <span class="font-bold block flex items-center gap-1">
+                <i class="fa-solid fa-bolt text-amber-600"></i>Quick Shopkeeper Demo
+              </span>
+              <span class="text-slate-600 text-[11px]">Apex Mobile Accessories (Maharashtra)</span>
+            </div>
+            <button type="button" id="demo-fill-btn" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-lg shadow-sm transition whitespace-nowrap text-xs">
+              Auto Fill Demo
+            </button>
+          </div>
+
+          <!-- The Minimalist Login Form -->
+          <form id="login-form" class="space-y-4">
+            
+            <!-- GSTIN Input Field -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="login-gstin" class="text-xs font-bold text-slate-700 flex items-center gap-1">
+                  <span>Goods & Services Tax Identification Number (GSTIN)</span>
+                  <span class="text-rose-500">*</span>
+                  <div class="tooltip-container ml-1">
+                    <i class="fa-solid fa-circle-question text-slate-400 text-xs"></i>
+                    <div class="tooltip-box">
+                      <strong>GSTIN:</strong> 15-digit unique tax identification issued by Govt. First 2 digits represent your state (e.g. 27 for Maharashtra).
+                    </div>
+                  </div>
+                </label>
+                <span id="gstin-state-badge" class="hidden text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">
+                  27 - Maharashtra
+                </span>
+              </div>
+              
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fa-solid fa-id-card"></i>
+                </div>
+                <input 
+                  type="text" 
+                  id="login-gstin" 
+                  name="gstin" 
+                  maxlength="15" 
+                  placeholder="e.g. 27ABCDE1234F1Z5" 
+                  class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm font-mono uppercase tracking-wider focus:outline-none focus:border-gst-navy focus:bg-white focus:ring-2 focus:ring-blue-100 transition"
+                  required
+                >
+              </div>
+              <div id="gstin-feedback" class="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
+                <span>Format: 2 Digit State + 10 Char PAN + 1 Entity + 1 'Z' + 1 Check Digit</span>
+              </div>
+            </div>
+
+            <!-- Username Input Field -->
+            <div>
+              <label for="login-username" class="text-xs font-bold text-slate-700 block mb-1.5">
+                Username <span class="text-rose-500">*</span>
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                <input 
+                  type="text" 
+                  id="login-username" 
+                  name="username" 
+                  placeholder="Enter your GST portal username" 
+                  class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-gst-navy focus:bg-white focus:ring-2 focus:ring-blue-100 transition"
+                  required
+                >
+              </div>
+            </div>
+
+            <!-- Password Input Field with Toggle -->
+            <div>
+              <label for="login-password" class="text-xs font-bold text-slate-700 block mb-1.5">
+                Password <span class="text-rose-500">*</span>
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fa-solid fa-lock"></i>
+                </div>
+                <input 
+                  type="password" 
+                  id="login-password" 
+                  name="password" 
+                  placeholder="Enter your secret password" 
+                  class="w-full pl-10 pr-12 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-gst-navy focus:bg-white focus:ring-2 focus:ring-blue-100 transition"
+                  required
+                >
+                <button 
+                  type="button" 
+                  id="toggle-password-btn" 
+                  class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-700 transition"
+                  title="Show/Hide Password"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Login Action Button -->
+            <div class="pt-2">
+              <button 
+                type="submit" 
+                id="login-submit-btn" 
+                class="w-full py-3 bg-gst-navy hover:bg-gst-dark text-white font-bold text-sm rounded-lg shadow-md hover:shadow-lg transition-all transform active:scale-[0.99] flex items-center justify-center space-x-2"
+              >
+                <i class="fa-solid fa-arrow-right-to-bracket mr-1"></i>
+                <span>Login to Dashboard</span>
+              </button>
+            </div>
+
+          </form>
+
+          <!-- Security note & help -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+            <span class="flex items-center gap-1">
+              <i class="fa-solid fa-shield-check text-emerald-600"></i> No Captcha required for registered device
+            </span>
+            <a href="javascript:void(0)" onclick="showToast('Password reset link sent to registered mobile OTP.', 'info')" class="text-gst-navy hover:underline font-semibold">Forgot Password?</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================== -->
+    <!-- 2. BUSINESS DASHBOARD & RETURN WORKSPACE                   -->
+    <!-- ========================================================== -->
+    <section id="portal-dashboard-section" class="hidden space-y-6 animate-fade-in">
+
+      <!-- ================= NAVIGATION MODULE TABS ================= -->
+      <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-2 no-print">
+        
+        <div class="flex flex-wrap items-center gap-1">
+          <button id="nav-btn-dashboard" onclick="switchMainModule('dashboard')" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center space-x-2 bg-gst-navy text-white shadow">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Dashboard Overview</span>
+          </button>
+          
+          <button id="nav-btn-gstr1" onclick="switchMainModule('gstr1')" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-100 transition flex items-center space-x-2">
+            <i class="fa-solid fa-file-invoice"></i>
+            <span>GSTR-1 (Sales Entry)</span>
+          </button>
+
+          <button id="nav-btn-gstr3b" onclick="switchMainModule('gstr3b')" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-100 transition flex items-center space-x-2">
+            <i class="fa-solid fa-calculator"></i>
+            <span>GSTR-3B (Tax & ITC)</span>
+          </button>
+
+          <button id="nav-btn-wizard" onclick="switchMainModule('wizard')" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-100 transition flex items-center space-x-2 border border-amber-300 bg-amber-50 text-amber-900">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-600"></i>
+            <span>8-Step Filing Wizard</span>
+          </button>
+        </div>
+
+        <!-- Period Quick Switcher -->
+        <div class="flex items-center space-x-2 text-xs bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200">
+          <span class="font-bold text-slate-500 uppercase tracking-wider text-[10px]">Return Period:</span>
+          <select id="select-fy" onchange="handlePeriodChange()" class="bg-white border border-slate-300 rounded px-2 py-0.5 font-bold text-slate-800 text-xs focus:outline-none">
+            <option value="2026-27" selected>FY 2026-27</option>
+            <option value="2025-26">FY 2025-26</option>
+          </select>
+          <select id="select-period" onchange="handlePeriodChange()" class="bg-white border border-slate-300 rounded px-2 py-0.5 font-bold text-slate-800 text-xs focus:outline-none">
+            <option value="October 2026" selected>October 2026</option>
+            <option value="September 2026">September 2026</option>
+            <option value="August 2026">August 2026</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- ================= MODULE 1: DASHBOARD OVERVIEW ================= -->
+      <div id="module-dashboard" class="space-y-6">
+
+        <!-- Business Details Identification Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          
+          <!-- Card 1: Trade Name & GSTIN -->
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm md:col-span-2 flex flex-col justify-between relative overflow-hidden">
+            <div class="absolute -right-4 -bottom-4 text-slate-100 text-8xl pointer-events-none select-none">
+              <i class="fa-solid fa-shop"></i>
+            </div>
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Business / Trade Name</span>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-800 display-reg-type">
+                  Regular Taxpayer
+                </span>
+              </div>
+              <h2 class="text-xl font-black text-gst-navy mt-1 display-trade-name">Apex Mobile Accessories</h2>
+              
+              <div class="mt-3 flex items-center space-x-2">
+                <span class="text-xs text-slate-500">GSTIN:</span>
+                <span class="font-mono font-bold text-sm bg-slate-100 px-2 py-0.5 rounded text-slate-800 display-gstin">27ABCDE1234F1Z5</span>
+                <button onclick="navigator.clipboard.writeText(appState.auth.gstin); showToast('GSTIN copied to clipboard', 'info')" class="text-slate-400 hover:text-gst-navy p-1" title="Copy GSTIN">
+                  <i class="fa-solid fa-copy text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center gap-1.5">
+              <i class="fa-solid fa-location-dot text-rose-500"></i>
+              <span class="font-semibold text-slate-700 display-jurisdiction">Maharashtra - Zone 4 (Bandra West)</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Active Period Card -->
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Active Return Period</span>
+              <div class="text-lg font-black text-slate-900 mt-1 display-active-period">October 2026 (2026-27)</div>
+              <p class="text-xs text-slate-500 mt-1">Monthly QRMP / Regular Filing Cycle</p>
+            </div>
+            <div class="mt-3 bg-emerald-50 text-emerald-800 p-2.5 rounded-lg border border-emerald-200 text-xs flex items-center gap-2">
+              <i class="fa-solid fa-calendar-check text-emerald-600"></i>
+              <span>Next Due: <strong>20 Nov 2026</strong></span>
+            </div>
+          </div>
+
+          <!-- Card 3: Filing Status Summary -->
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Current Filing Status</span>
+            
+            <div class="space-y-2 mt-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700">GSTR-1 (Sales):</span>
+                <span id="gstr1-status-badge" class="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-rose-100 text-rose-800">Pending</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700">GSTR-3B (Tax):</span>
+                <span id="gstr3b-status-badge" class="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-rose-100 text-rose-800">Pending</span>
+              </div>
+            </div>
+
+            <button onclick="switchMainModule('wizard')" class="mt-3 w-full py-1.5 bg-gst-navy hover:bg-gst-dark text-white rounded text-xs font-bold transition flex items-center justify-center space-x-1">
+              <span>Start Filing Now</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Dukaandar Live Financial Health Metrics -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+              <span>Total Sales Turnover</span>
+              <i class="fa-solid fa-arrow-trend-up text-emerald-500"></i>
+            </div>
+            <div id="dash-kpi-turnover" class="text-xl font-black text-slate-900">₹1,00,000.00</div>
+            <div class="text-[11px] text-slate-500 mt-1">Outward supplies recorded</div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+              <span>Total Tax Collected</span>
+              <i class="fa-solid fa-coins text-amber-500"></i>
+            </div>
+            <div id="dash-kpi-tax" class="text-xl font-black text-slate-900">₹18,000.00</div>
+            <div class="text-[11px] text-slate-500 mt-1">Gross GST Liability</div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+              <span class="flex items-center gap-1">
+                ITC (Purchase Tax)
+                <div class="tooltip-container">
+                  <i class="fa-solid fa-circle-question text-slate-400 text-[10px]"></i>
+                  <div class="tooltip-box">
+                    <strong>ITC (Input Tax Credit):</strong> Tax you paid on wholesale stock purchases that directly reduces what you pay to the govt.
+                  </div>
+                </div>
+              </span>
+              <i class="fa-solid fa-hand-holding-dollar text-blue-500"></i>
+            </div>
+            <div id="dash-kpi-itc" class="text-xl font-black text-emerald-600">₹9,000.00</div>
+            <div class="text-[11px] text-slate-500 mt-1">Eligible tax credit from 2B</div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
+              <span>Net Cash Payable</span>
+              <i class="fa-solid fa-wallet text-purple-500"></i>
+            </div>
+            <div id="dash-kpi-net" class="text-xl font-black text-gst-navy">₹9,000.00</div>
+            <div class="text-[11px] text-slate-500 mt-1">Gross Tax − Eligible ITC</div>
+          </div>
+
+        </div>
+
+        <!-- 2 Primary Core Return Cards: GSTR-1 vs GSTR-3B -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Core Card 1: GSTR-1 -->
+          <div class="bg-white rounded-xl border-2 border-slate-200 hover:border-gst-navy transition-all shadow-sm p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="w-10 h-10 rounded-lg bg-blue-100 text-gst-navy flex items-center justify-center font-bold text-lg">
+                  <i class="fa-solid fa-file-invoice"></i>
+                </span>
+                <span class="text-xs font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded">Due: 11th Nov 2026</span>
+              </div>
+              <h3 class="text-lg font-extrabold text-slate-900 mt-3">GSTR-1: Outward Supplies</h3>
+              <p class="text-xs text-slate-500 mt-1">
+                Record all invoices issued to registered buyers (B2B), retail customer sales (B2C), debit/credit notes, and exempt sales.
+              </p>
+
+              <div class="grid grid-cols-3 gap-2 mt-4 bg-slate-50 p-3 rounded-lg text-center text-xs">
+                <div>
+                  <span class="text-[10px] text-slate-400 block uppercase">Invoices</span>
+                  <span id="dash-gstr1-count" class="font-bold text-slate-800">3 B2B</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-400 block uppercase">B2C Retail</span>
+                  <span class="font-bold text-slate-800">₹45,000</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-400 block uppercase">Credit Notes</span>
+                  <span class="font-bold text-slate-800">1 Note</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs text-slate-500">Step 1 of GST Return Process</span>
+              <button onclick="switchMainModule('gstr1')" class="px-4 py-2 bg-gst-navy hover:bg-gst-dark text-white rounded-lg text-xs font-bold transition flex items-center space-x-1.5">
+                <span>Enter Sales (GSTR-1)</span>
+                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Core Card 2: GSTR-3B -->
+          <div class="bg-white rounded-xl border-2 border-slate-200 hover:border-emerald-600 transition-all shadow-sm p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg">
+                  <i class="fa-solid fa-calculator"></i>
+                </span>
+                <span class="text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded">Due: 20th Nov 2026</span>
+              </div>
+              <h3 class="text-lg font-extrabold text-slate-900 mt-3">GSTR-3B: Monthly Tax Return & ITC</h3>
+              <p class="text-xs text-slate-500 mt-1">
+                Real-time dynamic summary calculating output tax, offsetting your eligible ITC on purchases, and paying net cash tax.
+              </p>
+
+              <div class="grid grid-cols-3 gap-2 mt-4 bg-emerald-50/50 p-3 rounded-lg text-center text-xs">
+                <div>
+                  <span class="text-[10px] text-slate-500 block uppercase">Output Tax</span>
+                  <span class="font-bold text-slate-800">₹18,000</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-500 block uppercase">ITC Offset</span>
+                  <span class="font-bold text-emerald-700">-₹9,000</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-500 block uppercase">Net Cash</span>
+                  <span class="font-bold text-gst-navy">₹9,000</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs text-slate-500">Step 2: Formal Tax Summary</span>
+              <button onclick="switchMainModule('gstr3b')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition flex items-center space-x-1.5 shadow-sm">
+                <span>Calculate & Pay (GSTR-3B)</span>
+                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dukaandar Guidance Box -->
+        <div class="dukaandar-tip p-4 rounded-xl shadow-sm text-xs space-y-1">
+          <div class="font-bold text-amber-900 flex items-center gap-2">
+            <i class="fa-solid fa-lightbulb text-amber-600 text-sm"></i>
+            <span>Dukaandar Sahayata (Shopkeeper Guide for GST Return):</span>
+          </div>
+          <p class="text-slate-700">
+            1. First record your invoices in <strong>GSTR-1</strong>. 
+            2. Click <strong>"Sync GSTR-1 to GSTR-3B"</strong> to transfer your total sales automatically without manual re-typing.
+            3. Review your purchases and <strong>Eligible ITC</strong> in GSTR-3B.
+            4. Use the <strong>8-Step Filing Wizard</strong> to validate math, preview the return, and submit with Aadhaar OTP (EVC).
+          </p>
+        </div>
+
+      </div>
+
+      <!-- ================= MODULE 2: GSTR-1 MODULE (SALES ENTRY) ================= -->
+      <div id="module-gstr1" class="hidden space-y-6">
+
+        <!-- GSTR-1 Module Header -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <h2 class="text-lg font-black text-slate-900">GSTR-1: Details of Outward Supplies of Goods or Services</h2>
+              <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Sales Entry</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Period: <strong class="display-active-period">October 2026</strong> | Supplier: <strong class="display-trade-name">Apex Mobile Accessories</strong> (<span class="display-gstin font-mono">27ABCDE1234F1Z5</span>)</p>
+          </div>
+
+          <!-- Sync to 3B Button -->
+          <button id="btn-sync-gstr1-to-3b" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition shadow flex items-center space-x-2">
+            <i class="fa-solid fa-rotate mr-1"></i>
+            <span>Sync GSTR-1 Sales to GSTR-3B</span>
+          </button>
+        </div>
+
+        <!-- GSTR-1 Sub-navigation Tabs -->
+        <div class="flex border-b border-slate-200 bg-white rounded-t-xl px-4 pt-2 text-xs font-semibold overflow-x-auto">
+          <button id="gstr1-tab-btn-b2b" class="py-2.5 px-4 border-b-2 border-gst-navy text-gst-navy font-bold flex items-center space-x-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-building"></i>
+            <span>B2B Sales (Registered Buyers)</span>
+            <span id="b2b-invoice-count" class="bg-blue-100 text-blue-800 text-[10px] px-1.5 py-0.2 rounded-full font-bold ml-1">3</span>
+          </button>
+          
+          <button id="gstr1-tab-btn-b2c" class="py-2.5 px-4 text-slate-500 hover:text-slate-800 flex items-center space-x-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-user-group"></i>
+            <span>B2C Sales (Retail Walk-in Customers)</span>
+          </button>
+
+          <button id="gstr1-tab-btn-cdn" class="py-2.5 px-4 text-slate-500 hover:text-slate-800 flex items-center space-x-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-file-circle-minus"></i>
+            <span>Credit / Debit Notes (Returns)</span>
+          </button>
+
+          <button id="gstr1-tab-btn-exempt" class="py-2.5 px-4 text-slate-500 hover:text-slate-800 flex items-center space-x-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Exempt & Nil-Rated Supplies</span>
+          </button>
+        </div>
+
+        <!-- SUB-PANE 1: B2B SALES -->
+        <div id="gstr1-pane-b2b" class="space-y-6">
+          
+          <!-- B2B Add Form -->
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-plus-circle text-gst-navy"></i>
+                <span>Add B2B Tax Invoice (4A, 4B, 4C, 6B, 6C)</span>
+              </h3>
+              <div class="tooltip-container">
+                <span class="text-[11px] text-slate-500 hover:text-gst-navy flex items-center gap-1">
+                  <i class="fa-solid fa-circle-question"></i> What is B2B?
+                </span>
+                <div class="tooltip-box">
+                  <strong>B2B (Business-to-Business):</strong> Sales made to registered buyers with a GSTIN. They need this invoice in their GSTR-2B to claim tax credit.
+                </div>
+              </div>
+            </div>
+
+            <form id="form-add-b2b" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+              
+              <!-- Buyer GSTIN -->
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="font-bold text-slate-700">Buyer GSTIN <span class="text-rose-500">*</span></label>
+                  <span id="b2b-supply-type-badge" class="text-[10px] font-semibold text-slate-400">Intra / Inter</span>
+                </div>
+                <input 
+                  type="text" 
+                  id="b2b-buyer-gstin" 
+                  maxlength="15" 
+                  placeholder="e.g. 27AABCT1332L1Z9" 
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded font-mono uppercase focus:bg-white focus:border-gst-navy focus:outline-none"
+                  required
+                >
+              </div>
+
+              <!-- Buyer Name -->
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Buyer Business Name</label>
+                <input 
+                  type="text" 
+                  id="b2b-buyer-name" 
+                  placeholder="e.g. Om Electronics & Repairs" 
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded focus:bg-white focus:border-gst-navy focus:outline-none"
+                >
+              </div>
+
+              <!-- Invoice Number -->
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Invoice Number <span class="text-rose-500">*</span></label>
+                <input 
+                  type="text" 
+                  id="b2b-inv-no" 
+                  value="INV-2026-104" 
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded font-semibold focus:bg-white focus:border-gst-navy focus:outline-none"
+                  required
+                >
+              </div>
+
+              <!-- Invoice Date -->
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Invoice Date <span class="text-rose-500">*</span></label>
+                <input 
+                  type="date" 
+                  id="b2b-date" 
+                  value="2026-10-24" 
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded focus:bg-white focus:border-gst-navy focus:outline-none"
+                  required
+                >
+              </div>
+
+              <!-- Taxable Value -->
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Taxable Value (₹) <span class="text-rose-500">*</span></label>
+                <input 
+                  type="number" 
+                  id="b2b-taxable" 
+                  placeholder="e.g. 15000" 
+                  min="1" 
+                  step="any"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded font-bold text-slate-800 focus:bg-white focus:border-gst-navy focus:outline-none"
+                  required
+                >
+              </div>
+
+              <!-- Tax Rate Dropdown -->
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Applicable GST Rate</label>
+                <select id="b2b-rate" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-semibold focus:border-gst-navy focus:outline-none">
+                  <option value="5">5% (Essentials / Low rate)</option>
+                  <option value="12">12% (Standard rate 1)</option>
+                  <option value="18" selected>18% (Standard rate - Mobile/Tech)</option>
+                  <option value="28">28% (Luxury / De-merit goods)</option>
+                </select>
+              </div>
+
+              <!-- Real-time Tax & Total preview -->
+              <div class="bg-slate-50 p-2.5 rounded border border-slate-200 flex flex-col justify-center">
+                <div class="text-[10px] text-slate-500">Calculated GST Tax:</div>
+                <div id="b2b-calc-tax" class="text-xs font-bold text-amber-700">₹0.00</div>
+                <div class="text-[10px] text-slate-500 mt-1">Invoice Total: <strong id="b2b-calc-total" class="text-slate-800">₹0.00</strong></div>
+              </div>
+
+              <!-- Add Button -->
+              <div class="flex items-end">
+                <button type="submit" class="w-full py-2 bg-gst-navy hover:bg-gst-dark text-white rounded font-bold transition flex items-center justify-center space-x-1.5 shadow-sm">
+                  <i class="fa-solid fa-plus"></i>
+                  <span>Add B2B Invoice</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- B2B Invoices Table -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+              <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Added B2B Invoices List</h4>
+              <span class="text-xs text-slate-500">Auto-split between CGST/SGST (Intra) and IGST (Inter)</span>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                    <th class="py-2.5 px-3">Invoice No</th>
+                    <th class="py-2.5 px-3">Buyer GSTIN & Name</th>
+                    <th class="py-2.5 px-3">Date</th>
+                    <th class="py-2.5 px-3">Supply Type</th>
+                    <th class="py-2.5 px-3 text-right">Taxable (₹)</th>
+                    <th class="py-2.5 px-3 text-center">Rate</th>
+                    <th class="py-2.5 px-3 text-right">Taxes</th>
+                    <th class="py-2.5 px-3 text-right">Total (₹)</th>
+                    <th class="py-2.5 px-3 text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="b2b-invoices-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+                <tfoot>
+                  <tr class="bg-slate-100/70 border-t-2 border-slate-300 font-bold text-xs text-slate-900">
+                    <td colspan="4" class="py-3 px-3">Total Outward B2B Supplies:</td>
+                    <td id="b2b-total-taxable" class="py-3 px-3 text-right font-black text-slate-900">₹65,000.00</td>
+                    <td></td>
+                    <td id="b2b-total-tax" class="py-3 px-3 text-right text-amber-800">₹10,800.00</td>
+                    <td colspan="2"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SUB-PANE 2: B2C SALES -->
+        <div id="gstr1-pane-b2c" class="hidden space-y-6">
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-5">
+            <div>
+              <div class="flex items-center space-x-2">
+                <h3 class="text-sm font-bold text-slate-800">Table 7: B2C (Others) - Sales to Unregistered Consumers</h3>
+                <div class="tooltip-container">
+                  <i class="fa-solid fa-circle-question text-slate-400 text-xs"></i>
+                  <div class="tooltip-box">
+                    <strong>B2C Retail:</strong> Daily cash / UPI sales to end-consumers who do not hold a GST number. No GSTIN required; aggregate sales by tax rate.
+                  </div>
+                </div>
+              </div>
+              <p class="text-xs text-slate-500 mt-0.5">Aggregate your retail counter sales divided by state (Intra-state Maharashtra vs Inter-state outside).</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              
+              <!-- Intra-state Aggregate Form -->
+              <div class="bg-blue-50/40 p-4 rounded-xl border border-blue-200 space-y-3 text-xs">
+                <div class="flex items-center justify-between pb-2 border-b border-blue-200">
+                  <span class="font-bold text-blue-900 flex items-center gap-1">
+                    <i class="fa-solid fa-location-crosshairs text-blue-600"></i>
+                    <span>Intra-State Supplies (Maharashtra Counter Sales)</span>
+                  </span>
+                  <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-[10px]">CGST + SGST</span>
+                </div>
+                
+                <div>
+                  <label class="font-semibold text-slate-700 block mb-1">Total Taxable Sales to Local Consumers (₹)</label>
+                  <input type="number" id="b2c-intra-taxable" value="35000" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-bold text-slate-800 focus:outline-none focus:border-gst-navy">
+                </div>
+
+                <div>
+                  <label class="font-semibold text-slate-700 block mb-1">Applicable GST Rate</label>
+                  <select id="b2c-intra-rate" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-semibold focus:outline-none">
+                    <option value="5">5% Rate</option>
+                    <option value="12">12% Rate</option>
+                    <option value="18" selected>18% Rate (Most mobile accessories)</option>
+                    <option value="28">28% Rate</option>
+                  </select>
+                </div>
+                <div class="text-[11px] text-slate-500">
+                  Tax automatically splits into 50% CGST and 50% SGST.
+                </div>
+              </div>
+
+              <!-- Inter-state Aggregate Form -->
+              <div class="bg-purple-50/40 p-4 rounded-xl border border-purple-200 space-y-3 text-xs">
+                <div class="flex items-center justify-between pb-2 border-b border-purple-200">
+                  <span class="font-bold text-purple-900 flex items-center gap-1">
+                    <i class="fa-solid fa-truck-fast text-purple-600"></i>
+                    <span>Inter-State Supplies (E-Commerce / Courier Outside State)</span>
+                  </span>
+                  <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded text-[10px]">IGST</span>
+                </div>
+
+                <div>
+                  <label class="font-semibold text-slate-700 block mb-1">Place of Supply (State / POS)</label>
+                  <select id="b2c-inter-pos" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-semibold focus:outline-none">
+                    <option value="07">07 - Delhi</option>
+                    <option value="29">29 - Karnataka</option>
+                    <option value="24">24 - Gujarat</option>
+                    <option value="09">09 - Uttar Pradesh</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="font-semibold text-slate-700 block mb-1">Taxable Sales (₹)</label>
+                  <input type="number" id="b2c-inter-taxable" value="10000" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-bold text-slate-800 focus:outline-none focus:border-gst-navy">
+                </div>
+
+                <div>
+                  <label class="font-semibold text-slate-700 block mb-1">Applicable GST Rate</label>
+                  <select id="b2c-inter-rate" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-semibold focus:outline-none">
+                    <option value="18" selected>18% Rate</option>
+                    <option value="12">12% Rate</option>
+                    <option value="5">5% Rate</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex justify-end">
+              <button type="button" id="btn-save-b2c" class="px-5 py-2 bg-gst-navy hover:bg-gst-dark text-white rounded-lg text-xs font-bold transition flex items-center space-x-1.5 shadow-sm">
+                <i class="fa-solid fa-save"></i>
+                <span>Save B2C Retail Supplies</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-PANE 3: CREDIT / DEBIT NOTES -->
+        <div id="gstr1-pane-cdn" class="hidden space-y-6">
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-file-circle-minus text-rose-600"></i>
+                <span>Record Credit / Debit Notes (Table 9B - Sales Returns & Adjustments)</span>
+              </h3>
+              <div class="tooltip-container">
+                <span class="text-[11px] text-slate-500 hover:text-gst-navy flex items-center gap-1">
+                  <i class="fa-solid fa-circle-question"></i> What are Credit Notes?
+                </span>
+                <div class="tooltip-box">
+                  <strong>Credit Notes:</strong> Issued when a customer returns goods or if an invoice amount was overstated. This reduces your outward tax liability.
+                </div>
+              </div>
+            </div>
+
+            <form id="form-add-cdn" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Note Type</label>
+                <select id="cdn-type" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-semibold focus:outline-none">
+                  <option value="Credit Note" selected>Credit Note (Sales Return / Discount)</option>
+                  <option value="Debit Note">Debit Note (Price Upward Adjustment)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Original Invoice Number</label>
+                <input type="text" id="cdn-orig-inv" placeholder="e.g. INV-2026-089" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded focus:bg-white focus:outline-none" required>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Note Number</label>
+                <input type="text" id="cdn-no" value="CN-2026-005" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded font-semibold focus:bg-white focus:outline-none" required>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Customer / Buyer</label>
+                <input type="text" id="cdn-buyer" placeholder="e.g. Om Electronics" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded focus:bg-white focus:outline-none">
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Taxable Value Adjusted (₹)</label>
+                <input type="number" id="cdn-taxable" placeholder="e.g. 2500" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded font-bold focus:bg-white focus:outline-none" required>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">GST Rate</label>
+                <select id="cdn-rate" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-semibold focus:outline-none">
+                  <option value="18" selected>18%</option>
+                  <option value="12">12%</option>
+                  <option value="5">5%</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Reason for Issue</label>
+                <select id="cdn-reason" class="w-full px-3 py-2 bg-white border border-slate-300 rounded focus:outline-none">
+                  <option value="Sales Return">01 - Sales Return</option>
+                  <option value="Deficiency in Services">02 - Deficiency in Services</option>
+                  <option value="Post Sale Discount">03 - Post Sale Discount</option>
+                  <option value="Correction in Invoice">04 - Correction in Invoice</option>
+                </select>
+              </div>
+
+              <div class="flex items-end">
+                <button type="submit" class="w-full py-2 bg-rose-700 hover:bg-rose-800 text-white rounded font-bold transition flex items-center justify-center space-x-1.5 shadow-sm">
+                  <i class="fa-solid fa-plus"></i>
+                  <span>Record Note</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Table of notes -->
+            <div class="overflow-x-auto pt-3 border-t border-slate-100">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold">
+                    <th class="py-2 px-3">Note No</th>
+                    <th class="py-2 px-3">Type</th>
+                    <th class="py-2 px-3">Orig Invoice</th>
+                    <th class="py-2 px-3">Buyer</th>
+                    <th class="py-2 px-3">Reason</th>
+                    <th class="py-2 px-3 text-right">Taxable Impact</th>
+                    <th class="py-2 px-3 text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="cdn-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SUB-PANE 4: EXEMPT & NIL-RATED SUPPLIES -->
+        <div id="gstr1-pane-exempt" class="hidden space-y-6">
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                <span>Table 8: Nil Rated, Exempted and Non-GST Outward Supplies</span>
+              </h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+              <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <label class="font-bold text-slate-700 block mb-1">Nil-Rated Supplies (₹)</label>
+                <input type="number" id="exempt-nil-rated" value="2500" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-bold focus:outline-none">
+                <p class="text-[10px] text-slate-500 mt-1">Goods attracting 0% GST rate by notification.</p>
+              </div>
+
+              <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <label class="font-bold text-slate-700 block mb-1">Exempted Supplies (₹)</label>
+                <input type="number" id="exempt-exempted" value="1500" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-bold focus:outline-none">
+                <p class="text-[10px] text-slate-500 mt-1">Wholly exempt items (e.g. unbranded fresh food).</p>
+              </div>
+
+              <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <label class="font-bold text-slate-700 block mb-1">Non-GST Supplies (₹)</label>
+                <input type="number" id="exempt-nongst" value="0" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-bold focus:outline-none">
+                <p class="text-[10px] text-slate-500 mt-1">Items outside GST purview (e.g. petrol/diesel).</p>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex justify-end">
+              <button onclick="showToast('Exempt supplies updated!', 'success')" class="px-4 py-2 bg-gst-navy text-white text-xs font-bold rounded hover:bg-gst-dark transition">
+                Update Table 8
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- GSTR-1 OUTWARD SUPPLIES SUMMARY BANNER -->
+        <div class="bg-gradient-to-r from-gst-dark to-gst-navy text-white p-5 rounded-xl shadow-md border-l-4 border-amber-400 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="text-[11px] uppercase tracking-wider text-amber-300 font-bold">Total GSTR-1 Outward Summary (Net of Credit Notes)</div>
+            <div class="flex flex-wrap items-baseline gap-4 mt-2">
+              <div>
+                <span class="text-xs text-slate-300">Net Taxable:</span>
+                <span id="gstr1-sum-taxable" class="text-lg font-black ml-1 text-white">₹1,07,000.00</span>
+              </div>
+              <div class="text-slate-400">|</div>
+              <div>
+                <span class="text-xs text-slate-300">CGST:</span>
+                <span id="gstr1-sum-cgst" class="text-sm font-bold ml-1 text-emerald-300">₹4,890.00</span>
+              </div>
+              <div>
+                <span class="text-xs text-slate-300">SGST:</span>
+                <span id="gstr1-sum-sgst" class="text-sm font-bold ml-1 text-emerald-300">₹4,890.00</span>
+              </div>
+              <div>
+                <span class="text-xs text-slate-300">IGST:</span>
+                <span id="gstr1-sum-igst" class="text-sm font-bold ml-1 text-purple-300">₹5,760.00</span>
+              </div>
+              <div class="text-slate-400">|</div>
+              <div>
+                <span class="text-xs text-slate-300">Total Tax:</span>
+                <span id="gstr1-sum-totaltax" class="text-base font-extrabold ml-1 text-amber-400">₹15,540.00</span>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="syncGstr1ToGstr3b()" class="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-lg text-xs font-bold transition shadow-md flex items-center justify-center space-x-2 whitespace-nowrap">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            <span>Push Data to GSTR-3B</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ================= MODULE 3: GSTR-3B MODULE (TAX SUMMARY & ITC) ================= -->
+      <div id="module-gstr3b" class="hidden space-y-6">
+
+        <!-- GSTR-3B Header -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <h2 class="text-lg font-black text-slate-900">GSTR-3B: Monthly Summary Return & Tax Calculation</h2>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Dynamic Math Engine</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Real-time calculations for Sales Output Tax, Input Tax Credit (ITC), and Net Cash Liability.</p>
+          </div>
+
+          <button onclick="openFilingWizard()" class="px-4 py-2 bg-gst-navy hover:bg-gst-dark text-white rounded-lg text-xs font-bold transition shadow flex items-center space-x-2">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
+            <span>Proceed to 8-Step Wizard</span>
+          </button>
+        </div>
+
+        <!-- 3-Column Interactive Step-by-Step Summary Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          <!-- COLUMN A: SALES SUMMARY INPUTS -->
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <span class="text-xs font-bold uppercase tracking-wider text-gst-navy flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-gst-navy text-white flex items-center justify-center text-[10px]">A</span>
+                <span>Sales Summary Inputs</span>
+              </span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">Table 3.1</span>
+            </div>
+
+            <!-- Total Sales / Turnover -->
+            <div>
+              <label class="text-xs font-bold text-slate-700 block mb-1">
+                Total Sales / Gross Turnover (₹)
+              </label>
+              <input 
+                type="number" 
+                id="gstr3b-turnover" 
+                value="107000" 
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded font-semibold text-sm focus:outline-none focus:border-gst-navy"
+              >
+              <p class="text-[10px] text-slate-400 mt-1">Includes taxable, nil-rated and exempt turnover.</p>
+            </div>
+
+            <!-- Total Taxable Sales Value -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="text-xs font-bold text-slate-700">Total Taxable Sales Value (₹) <span class="text-rose-500">*</span></label>
+                <button type="button" onclick="document.getElementById('gstr3b-taxable-sales').value='100000'; recalculateGstr3bMath();" class="text-[10px] text-gst-navy hover:underline font-semibold">Set ₹1,00,000</button>
+              </div>
+              <input 
+                type="number" 
+                id="gstr3b-taxable-sales" 
+                value="100000" 
+                class="w-full px-3 py-2 bg-blue-50/50 border border-blue-300 rounded font-black text-slate-900 text-base focus:outline-none focus:border-gst-navy"
+                placeholder="100000"
+              >
+            </div>
+
+            <!-- Applicable GST Rate Selector -->
+            <div>
+              <label class="text-xs font-bold text-slate-700 block mb-1">Applicable GST Rate Selector</label>
+              <select id="gstr3b-rate-select" class="w-full px-3 py-2 bg-white border border-slate-300 rounded font-bold text-slate-800 text-xs focus:outline-none focus:border-gst-navy">
+                <option value="5">5% GST Rate</option>
+                <option value="12">12% GST Rate</option>
+                <option value="18" selected>18% GST Rate (Standard)</option>
+                <option value="28">28% GST Rate (Highest Bracket)</option>
+              </select>
+            </div>
+
+            <!-- Supply Jurisdiction Type (Intra vs Inter) -->
+            <div class="pt-2">
+              <span class="text-xs font-bold text-slate-700 block mb-1.5">Supply Nature (Place of Supply)</span>
+              <div class="space-y-2 text-xs">
+                <label class="flex items-center space-x-2 p-2 rounded border border-blue-200 bg-blue-50/30 cursor-pointer">
+                  <input type="radio" name="gstr3b-supply-type" id="gstr3b-supply-intra" value="intra" checked class="text-gst-navy">
+                  <div>
+                    <span class="font-bold text-slate-800">Intra-State (Same State - Maharashtra)</span>
+                    <span class="block text-[10px] text-slate-500">Split 50% CGST + 50% SGST</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center space-x-2 p-2 rounded border border-purple-200 bg-purple-50/30 cursor-pointer">
+                  <input type="radio" name="gstr3b-supply-type" id="gstr3b-supply-inter" value="inter" class="text-gst-navy">
+                  <div>
+                    <span class="font-bold text-slate-800">Inter-State (Different State)</span>
+                    <span class="block text-[10px] text-slate-500">100% IGST applied</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- COLUMN B: AUTOMATIC SALES TAX BREAKDOWN (REAL-TIME CALCULATION) -->
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                  <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">B</span>
+                  <span>Automatic Sales Tax Breakdown</span>
+                </span>
+                <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Real-Time</span>
+              </div>
+
+              <!-- Total GST Output Calculation -->
+              <div class="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <div class="text-[11px] text-slate-500 font-semibold uppercase">Total GST Output Amount</div>
+                <div class="text-[11px] text-slate-400">Taxable Sales × GST Rate</div>
+                <div id="calc-total-gst" class="text-2xl font-black text-slate-900 mt-1">₹18,000.00</div>
+              </div>
+
+              <!-- Split Details (Intra vs Inter) -->
+              <div class="mt-4 space-y-3">
+                <div id="calc-split-description" class="text-xs font-semibold text-slate-600 italic">
+                  Intra-State Supply (Maharashtra): Split 50% CGST (9%) & 50% SGST (9%)
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <!-- CGST Box -->
+                  <div class="p-3 rounded-lg bg-blue-50/70 border border-blue-200 text-xs">
+                    <div class="flex items-center justify-between text-blue-900 font-bold">
+                      <span>CGST (Central Tax)</span>
+                      <div class="tooltip-container">
+                        <i class="fa-solid fa-circle-question text-blue-400 text-[10px]"></i>
+                        <div class="tooltip-box">
+                          <strong>CGST:</strong> Central Goods and Services Tax collected by the Union Government on intra-state supplies.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-[10px] text-slate-500">Total GST / 2</div>
+                    <div id="calc-cgst-output" class="text-base font-black text-blue-950 mt-1">₹9,000.00</div>
+                  </div>
+
+                  <!-- SGST Box -->
+                  <div class="p-3 rounded-lg bg-blue-50/70 border border-blue-200 text-xs">
+                    <div class="flex items-center justify-between text-blue-900 font-bold">
+                      <span>SGST (State Tax)</span>
+                      <div class="tooltip-container">
+                        <i class="fa-solid fa-circle-question text-blue-400 text-[10px]"></i>
+                        <div class="tooltip-box">
+                          <strong>SGST:</strong> State Goods and Services Tax collected by Maharashtra State Government.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-[10px] text-slate-500">Total GST / 2</div>
+                    <div id="calc-sgst-output" class="text-base font-black text-blue-950 mt-1">₹9,000.00</div>
+                  </div>
+                </div>
+
+                <!-- IGST Box -->
+                <div class="p-3 rounded-lg bg-purple-50/70 border border-purple-200 text-xs">
+                  <div class="flex items-center justify-between text-purple-900 font-bold">
+                    <span>IGST (Integrated Tax)</span>
+                    <div class="tooltip-container">
+                      <i class="fa-solid fa-circle-question text-purple-400 text-[10px]"></i>
+                      <div class="tooltip-box">
+                        <strong>IGST:</strong> Integrated GST for supplies between two different states or imports. Full tax goes to Centre and is shared.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-[10px] text-slate-500">Inter-State Outward Supply</div>
+                  <div id="calc-igst-output" class="text-base font-black text-purple-950 mt-1">₹0.00</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Formula helper -->
+            <div class="bg-amber-50 p-2.5 rounded-lg border border-amber-200 text-[11px] text-amber-900">
+              <i class="fa-solid fa-calculator mr-1 text-amber-600"></i>
+              <span>Formula: <strong>₹1,00,000 × 18% = ₹18,000</strong> (CGST ₹9,000 + SGST ₹9,000)</span>
+            </div>
+          </div>
+
+          <!-- COLUMN C: PURCHASE & INPUT TAX CREDIT (ITC) INPUTS -->
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-purple-800 flex items-center gap-1.5">
+                  <span class="w-5 h-5 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px]">C</span>
+                  <span>Purchase & Eligible ITC</span>
+                </span>
+                <span class="text-[10px] bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-semibold">Table 4</span>
+              </div>
+
+              <!-- Purchase inputs -->
+              <div class="space-y-3 mt-3">
+                <div>
+                  <label class="text-xs font-bold text-slate-700 block mb-1">Total Wholesale Purchase Amount (₹)</label>
+                  <input 
+                    type="number" 
+                    id="gstr3b-purchase-amount" 
+                    value="50000" 
+                    class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded font-semibold text-xs focus:outline-none focus:border-gst-navy"
+                  >
+                  <p class="text-[10px] text-slate-400 mt-1">Stock bought from distributor (e.g. mobile accessories).</p>
+                </div>
+
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <label class="text-xs font-bold text-slate-700 flex items-center gap-1">
+                      <span>Eligible Input Tax Credit (ITC) (₹)</span>
+                      <div class="tooltip-container">
+                        <i class="fa-solid fa-circle-question text-slate-400 text-xs"></i>
+                        <div class="tooltip-box">
+                          <strong>Eligible ITC:</strong> Tax paid on your purchases that can be legally offset against your sales tax. Auto-populated from your supplier's GSTR-2B.
+                        </div>
+                      </div>
+                    </label>
+                    <button type="button" onclick="document.getElementById('gstr3b-eligible-itc').value='9000'; recalculateGstr3bMath();" class="text-[10px] text-gst-navy hover:underline font-semibold">Set ₹9,000</button>
+                  </div>
+                  <input 
+                    type="number" 
+                    id="gstr3b-eligible-itc" 
+                    value="9000" 
+                    class="w-full px-3 py-2 bg-emerald-50/50 border border-emerald-300 rounded font-black text-emerald-800 text-base focus:outline-none focus:border-emerald-600"
+                  >
+                </div>
+
+                <!-- ITC Breakdown -->
+                <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs space-y-1">
+                  <div class="text-[11px] font-bold text-slate-600 uppercase">Available ITC Breakdown:</div>
+                  <div class="flex justify-between text-slate-700">
+                    <span>CGST ITC:</span>
+                    <strong id="calc-itc-cgst">₹4,500.00</strong>
+                  </div>
+                  <div class="flex justify-between text-slate-700">
+                    <span>SGST ITC:</span>
+                    <strong id="calc-itc-sgst">₹4,500.00</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Net Payable Result Box -->
+            <div class="p-4 rounded-xl bg-slate-900 text-white space-y-2">
+              <div class="flex items-center justify-between text-xs text-slate-300">
+                <span>Net Cash Tax Payable:</span>
+                <span id="calc-liability-badge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-400 text-slate-900">
+                  PMT-06 Required
+                </span>
+              </div>
+              <div class="flex items-baseline justify-between">
+                <span class="text-xs text-slate-400">Gross − ITC =</span>
+                <span id="calc-net-payable" class="text-2xl font-black text-amber-300">₹9,000.00</span>
+              </div>
+              <p class="text-[10px] text-slate-400 border-t border-slate-800 pt-1.5">
+                (Gross Tax ₹18,000 − Eligible ITC ₹9,000)
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Real-Time Reconciled Bottom Banner -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-check text-emerald-600"></i>
+              <span>GSTR-3B Dynamic Auto-Calculation Verified</span>
+            </span>
+            <p class="text-xs text-slate-500">Gross Tax Liability: <strong id="calc-gross-liability" class="text-slate-800">₹18,000.00</strong> | Input Tax Credit: <strong id="calc-eligible-itc-display" class="text-emerald-700">- ₹9,000.00</strong></p>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <button onclick="recalculateGstr3bMath(); showToast('Dynamic figures recalculated!', 'info');" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition">
+              <i class="fa-solid fa-calculator mr-1"></i>Recompute
+            </button>
+            <button onclick="openFilingWizard()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition shadow flex items-center space-x-2">
+              <span>Start 8-Step Filing Wizard</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= MODULE 4: 8-STEP RETURN FILING WIZARD ================= -->
+      <div id="module-wizard" class="hidden space-y-6">
+
+        <!-- Wizard Header & Stepper Bar -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+            <div>
+              <div class="flex items-center space-x-2">
+                <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-xs">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </span>
+                <h2 class="text-lg font-black text-slate-900">GST Return Filing & Submission Wizard</h2>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">Simple 8-step verified workflow for error-free return filing.</p>
+            </div>
+
+            <div class="flex items-center space-x-2 text-xs">
+              <span class="text-slate-500">Progress:</span>
+              <span class="font-extrabold text-gst-navy">Step <span id="wizard-progress-num">1</span> of 8</span>
+            </div>
+          </div>
+
+          <!-- 8-Step Navigation Stepper Tabs -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 text-center text-xs">
+            
+            <button id="wizard-nav-step-1" onclick="goToWizardStep(1)" class="wizard-step p-2.5 rounded-lg border text-xs font-semibold flex flex-col items-center justify-center space-y-1 transition">
+              <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold">1</span>
+              <span class="text-[11px] whitespace-nowrap">Save Draft</span>
+            </button>
+
+            <button id="wizard-nav-step-2" onclick="goToWizardStep(2)" class="wizard-step p-2.5 rounded-lg border text-xs font-semibold flex flex-col items-center justify-center space-y-1 transition">
+              <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold">2</span>
+              <span class="text-[11px] whitespace-nowrap">Validate</span>
+            </button>
+
+            <button id="wizard-nav-step-3" onclick="goToWizardStep(3)" class="wizard-step p-2.5 rounded-lg border text-xs font-semibold flex flex-col items-center justify-center space-y-1 transition">
+              <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold">3</span>
+              <span class="text-[11px] whitespace-nowrap">Preview</span>
+            </button>
+
+            <button id="wizard-nav-step-4" onclick="goToWizardStep(4)" class="wizard-step p-2.5 rounded-lg border text-xs font-semibold flex flex-col items-center justify-center space-y-1 transition">
+              <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold">4</span>
+              <span class="text-[11px] whitespace-nowrap">Tax Liability</span>
+            </button>
+
+            <button id="wizard-nav-step-5" onclick="goToWizardStep(5)" class="wizard-step p-2.5 rounded-lg border text-xs font-semibold flex flex-col items-center justify-center space-y-1 transition">
+              <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold">5</span>
+              <span class="text-[11px] whitespace-nowrap">Offset Liability</span>
+            </button>
+
+            <button id="wizard-nav-step-6" onclick="goToWizardStep(6)" class="wizard-step p-2.5 rounded-lg border text-xs font-semibold flex flex-col items-center justify-center space-y-1 transition">
+              <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold">6</span>
+              <span class="text-[11px] whitespace-nowrap">Submit Return</span>
+            </button>
+
+            <button id="wizard-nav-step-7" onclick="goToWizardStep(7)" class="wizard-step p-2.5 rounded-lg border text-xs font-semibold flex flex-col items-center justify-center space-y-1 transition">
+              <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold">7</span>
+              <span class="text-[11px] whitespace-nowrap">Verification</span>
+            </button>
+
+            <button id="wizard-nav-step-8" onclick="goToWizardStep(8)" class="wizard-step p-2.5 rounded-lg border text-xs font-semibold flex flex-col items-center justify-center space-y-1 transition">
+              <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold">8</span>
+              <span class="text-[11px] whitespace-nowrap">Acknowledgement</span>
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- ================= STEP 1: SAVE DRAFT ================= -->
+        <div id="wizard-step-content-1" class="wizard-pane bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center space-x-3 pb-3 border-b border-slate-100">
+            <span class="w-8 h-8 rounded-full bg-blue-100 text-gst-navy flex items-center justify-center font-bold text-sm">1</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Step 1: Save Draft Progress</h3>
+              <p class="text-xs text-slate-500">Store current return progress locally in the encrypted browser storage.</p>
+            </div>
+          </div>
+
+          <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-200 text-xs text-slate-700 space-y-2">
+            <p><strong>Dukaandar Tip:</strong> Saving a draft locks in all your entered sales from GSTR-1 and dynamic calculations from GSTR-3B so you don't lose any data if your internet connection disconnects.</p>
+            <div id="step1-draft-timestamp" class="text-slate-500 font-mono text-[11px]">
+              No draft saved yet for this session.
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <button onclick="actionSaveDraft()" class="px-5 py-2.5 bg-gst-navy hover:bg-gst-dark text-white rounded-lg text-xs font-bold transition shadow-sm flex items-center space-x-2">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span>Save Return Draft</span>
+            </button>
+
+            <button onclick="goToWizardStep(2)" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition shadow-sm flex items-center space-x-2">
+              <span>Next: Validate Return</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= STEP 2: VALIDATE RETURN ================= -->
+        <div id="wizard-step-content-2" class="wizard-pane hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center space-x-3 pb-3 border-b border-slate-100">
+            <span class="w-8 h-8 rounded-full bg-blue-100 text-gst-navy flex items-center justify-center font-bold text-sm">2</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Step 2: Automated Validation & Math Reconciliation</h3>
+              <p class="text-xs text-slate-500">Check for missing mandatory fields, GSTIN structure, or mismatched tax calculations.</p>
+            </div>
+          </div>
+
+          <div id="step2-validation-list" class="space-y-3">
+            <!-- Dynamically populated checks -->
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <button onclick="goToWizardStep(1)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">
+              <i class="fa-solid fa-arrow-left mr-1"></i>Back
+            </button>
+
+            <div class="flex items-center space-x-3">
+              <button onclick="actionValidateReturn()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition">
+                <i class="fa-solid fa-check-double mr-1.5"></i>Run Validation Checks
+              </button>
+              <button onclick="goToWizardStep(3)" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition">
+                <span>Next: Preview Return</span>
+                <i class="fa-solid fa-arrow-right ml-1.5"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= STEP 3: PREVIEW RETURN ================= -->
+        <div id="wizard-step-content-3" class="wizard-pane hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div class="flex items-center space-x-3">
+              <span class="w-8 h-8 rounded-full bg-blue-100 text-gst-navy flex items-center justify-center font-bold text-sm">3</span>
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Step 3: Preview Form GSTR-3B Summary</h3>
+                <p class="text-xs text-slate-500">Official statutory preview summary of all filled figures prior to tax computation.</p>
+              </div>
+            </div>
+            <button onclick="printReturnPreview()" class="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold border border-slate-300">
+              <i class="fa-solid fa-print mr-1"></i>Print PDF
+            </button>
+          </div>
+
+          <!-- Official Form Table Preview Container -->
+          <div id="printable-preview-modal" class="border border-slate-300 rounded-xl p-5 bg-slate-50/50 space-y-4 text-xs">
+            <div class="text-center pb-3 border-b border-slate-300">
+              <div class="font-extrabold text-sm text-gst-navy">FORM GSTR-3B</div>
+              <div class="text-[11px] text-slate-600">[See rule 61(5)] - Monthly Summary Return</div>
+              <div class="text-[11px] text-slate-500 font-semibold mt-1">Period: <span id="preview-period" class="text-slate-800">October 2026</span></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 text-slate-700 text-xs py-2 bg-white p-3 rounded border border-slate-200">
+              <div><strong>Trade Name:</strong> <span id="preview-trade-name">Apex Mobile Accessories</span></div>
+              <div><strong>GSTIN:</strong> <span id="preview-gstin" class="font-mono">27ABCDE1234F1Z5</span></div>
+            </div>
+
+            <div class="space-y-2">
+              <div class="font-bold text-slate-800">3.1 Details of Outward Supplies and inward supplies liable to reverse charge:</div>
+              <table class="w-full text-left border border-slate-300 bg-white">
+                <tr class="bg-slate-100 font-bold border-b border-slate-300 text-[11px]">
+                  <th class="p-2">Nature of Supplies</th>
+                  <th class="p-2 text-right">Taxable Value (₹)</th>
+                  <th class="p-2 text-right">CGST (₹)</th>
+                  <th class="p-2 text-right">SGST (₹)</th>
+                  <th class="p-2 text-right">IGST (₹)</th>
+                  <th class="p-2 text-right">Total Tax (₹)</th>
+                </tr>
+                <tr class="border-b border-slate-200 text-xs">
+                  <td class="p-2">(a) Outward Taxable Supplies</td>
+                  <td id="preview-taxable-sales" class="p-2 text-right font-bold text-slate-900">₹1,00,000.00</td>
+                  <td id="preview-cgst" class="p-2 text-right">₹9,000.00</td>
+                  <td id="preview-sgst" class="p-2 text-right">₹9,000.00</td>
+                  <td id="preview-igst" class="p-2 text-right">₹0.00</td>
+                  <td id="preview-total-tax" class="p-2 text-right font-bold text-amber-800">₹18,000.00</td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="space-y-2">
+              <div class="font-bold text-slate-800">4. Eligible Input Tax Credit (ITC):</div>
+              <table class="w-full text-left border border-slate-300 bg-white">
+                <tr class="bg-slate-100 font-bold border-b border-slate-300 text-[11px]">
+                  <th class="p-2">Details</th>
+                  <th class="p-2 text-right">Eligible Credit Amount (₹)</th>
+                </tr>
+                <tr class="border-b border-slate-200 text-xs">
+                  <td class="p-2">(A) (5) All other ITC (From GSTR-2B inward supplies)</td>
+                  <td id="preview-itc" class="p-2 text-right font-bold text-emerald-700">₹9,000.00</td>
+                </tr>
+                <tr class="bg-slate-50 font-bold text-xs">
+                  <td class="p-2">Net Tax Liability Payable in Cash</td>
+                  <td id="preview-net-payable" class="p-2 text-right text-gst-navy font-black">₹9,000.00</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <button onclick="goToWizardStep(2)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">
+              <i class="fa-solid fa-arrow-left mr-1"></i>Back
+            </button>
+            <button onclick="goToWizardStep(4)" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition">
+              <span>Next: Calculate Tax Liability</span>
+              <i class="fa-solid fa-arrow-right ml-1.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= STEP 4: CALCULATE TAX LIABILITY ================= -->
+        <div id="wizard-step-content-4" class="wizard-pane hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center space-x-3 pb-3 border-b border-slate-100">
+            <span class="w-8 h-8 rounded-full bg-blue-100 text-gst-navy flex items-center justify-center font-bold text-sm">4</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Step 4: Calculate Tax Liability</h3>
+              <p class="text-xs text-slate-500">Statutory Equation: <strong>Net Payable = Gross Liability − Eligible ITC</strong></p>
+            </div>
+          </div>
+
+          <!-- Formula Cards Presentation -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+            
+            <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+              <div class="text-xs font-bold text-amber-900 uppercase">Gross Tax Liability</div>
+              <div id="step4-gross" class="text-2xl font-black text-amber-900 mt-2">₹18,000.00</div>
+              <div class="text-[11px] text-slate-500 mt-1">From outward sales</div>
+            </div>
+
+            <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+              <div class="text-xs font-bold text-emerald-900 uppercase">Less: Eligible ITC</div>
+              <div id="step4-itc" class="text-2xl font-black text-emerald-700 mt-2">₹9,000.00</div>
+              <div class="text-[11px] text-slate-500 mt-1">From wholesale purchases</div>
+            </div>
+
+            <div class="bg-slate-900 text-white p-4 rounded-xl border border-slate-800">
+              <div class="text-xs font-bold text-slate-300 uppercase">Net Tax Payable</div>
+              <div id="step4-net" class="text-2xl font-black text-amber-300 mt-2">₹9,000.00</div>
+              <div class="text-[11px] text-slate-400 mt-1">Net cash required via PMT-06</div>
+            </div>
+
+          </div>
+
+          <!-- Detailed Tax Head Breakdown -->
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs space-y-2">
+            <div class="font-bold text-slate-800">Detailed Head-Wise Breakdown:</div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="bg-white p-2.5 rounded border border-slate-200">
+                <span class="text-[10px] text-slate-500 block uppercase">Central Tax (CGST)</span>
+                <span class="text-xs text-slate-600">Gross: <strong id="step4-cgst-gross">₹9,000</strong></span>
+                <span class="text-xs text-emerald-700 block">ITC: <strong id="step4-cgst-itc">₹4,500</strong></span>
+              </div>
+              <div class="bg-white p-2.5 rounded border border-slate-200">
+                <span class="text-[10px] text-slate-500 block uppercase">State Tax (SGST)</span>
+                <span class="text-xs text-slate-600">Gross: <strong id="step4-sgst-gross">₹9,000</strong></span>
+                <span class="text-xs text-emerald-700 block">ITC: <strong id="step4-sgst-itc">₹4,500</strong></span>
+              </div>
+              <div class="bg-white p-2.5 rounded border border-slate-200">
+                <span class="text-[10px] text-slate-500 block uppercase">Integrated Tax (IGST)</span>
+                <span class="text-xs text-slate-600">Gross: <strong id="step4-igst-gross">₹0</strong></span>
+                <span class="text-xs text-slate-400 block">ITC: <strong>₹0</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <button onclick="goToWizardStep(3)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">
+              <i class="fa-solid fa-arrow-left mr-1"></i>Back
+            </button>
+            <button onclick="goToWizardStep(5)" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition">
+              <span>Next: Offset Liability</span>
+              <i class="fa-solid fa-arrow-right ml-1.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= STEP 5: OFFSET LIABILITY ================= -->
+        <div id="wizard-step-content-5" class="wizard-pane hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center space-x-3 pb-3 border-b border-slate-100">
+            <span class="w-8 h-8 rounded-full bg-blue-100 text-gst-navy flex items-center justify-center font-bold text-sm">5</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Step 5: Offset Liability with ITC Ledger</h3>
+              <p class="text-xs text-slate-500">Auto-utilize available ITC credits against tax liability and show remaining cash payable balance.</p>
+            </div>
+          </div>
+
+          <!-- Offset matrix visual -->
+          <div class="space-y-4">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3 text-xs">
+              <div class="font-bold text-slate-800">Ledger Utilization Summary:</div>
+              
+              <div class="flex items-center justify-between p-2.5 bg-white rounded border border-slate-200">
+                <span>Total Output Tax Liability:</span>
+                <strong id="step5-gross-tax" class="font-mono text-slate-900 text-sm">₹18,000.00</strong>
+              </div>
+
+              <div class="flex items-center justify-between p-2.5 bg-emerald-50 rounded border border-emerald-200 text-emerald-900">
+                <span>Auto-Utilized from Input Tax Credit (ITC):</span>
+                <strong id="step5-utilized-itc" class="font-mono text-emerald-700 text-sm">- ₹9,000.00</strong>
+              </div>
+
+              <div class="flex items-center justify-between p-2.5 bg-amber-50 rounded border border-amber-200 text-amber-900">
+                <span>Remaining Cash Payable Balance:</span>
+                <strong id="step5-cash-balance" class="font-mono text-amber-900 text-base">₹9,000.00</strong>
+              </div>
+
+              <div id="step5-offset-status" class="pt-1 text-xs">
+                <!-- Status text -->
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <button onclick="goToWizardStep(4)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">
+              <i class="fa-solid fa-arrow-left mr-1"></i>Back
+            </button>
+            <button onclick="actionConfirmOffset()" class="px-5 py-2.5 bg-gst-navy hover:bg-gst-dark text-white rounded-lg text-xs font-bold transition shadow-sm">
+              <i class="fa-solid fa-check mr-1.5"></i>Confirm ITC Offset & Proceed
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= STEP 6: SUBMIT RETURN ================= -->
+        <div id="wizard-step-content-6" class="wizard-pane hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center space-x-3 pb-3 border-b border-slate-100">
+            <span class="w-8 h-8 rounded-full bg-blue-100 text-gst-navy flex items-center justify-center font-bold text-sm">6</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Step 6: Submit & Lock Return</h3>
+              <p class="text-xs text-slate-500">Lock form entries for final filing to prevent accidental changes.</p>
+            </div>
+          </div>
+
+          <div id="step6-lock-status" class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900">
+            <!-- Dynamically populated lock warning -->
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3 text-xs">
+            <label class="flex items-start space-x-3 cursor-pointer">
+              <input type="checkbox" id="declaration-checkbox" checked class="mt-0.5 text-gst-navy rounded">
+              <span class="text-slate-700">
+                I hereby solemnly affirm and declare that the information given herein above is true and correct to the best of my knowledge and belief and nothing has been concealed therefrom.
+              </span>
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <button onclick="goToWizardStep(5)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">
+              <i class="fa-solid fa-arrow-left mr-1"></i>Back
+            </button>
+            <button id="btn-submit-and-lock" onclick="actionLockAndSubmit()" class="px-6 py-2.5 bg-rose-700 hover:bg-rose-800 text-white rounded-lg text-xs font-bold transition shadow-md">
+              <i class="fa-solid fa-lock mr-1.5"></i>Confirm & Lock Return Entries
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= STEP 7: VERIFICATION (EVC OR DSC) ================= -->
+        <div id="wizard-step-content-7" class="wizard-pane hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center space-x-3 pb-3 border-b border-slate-100">
+            <span class="w-8 h-8 rounded-full bg-blue-100 text-gst-navy flex items-center justify-center font-bold text-sm">7</span>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Step 7: Verification (EVC OTP or DSC)</h3>
+              <p class="text-xs text-slate-500">Legally sign your return filing via Electronic Verification Code (EVC) or Digital Signature (DSC).</p>
+            </div>
+          </div>
+
+          <!-- Method Selection Radio -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <label class="p-4 rounded-xl border-2 border-gst-navy bg-blue-50/30 cursor-pointer flex items-start space-x-3">
+              <input type="radio" name="verify-mode" id="radio-evc" value="EVC" checked class="mt-1 text-gst-navy">
+              <div>
+                <span class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                  <i class="fa-solid fa-mobile-screen text-gst-navy"></i>
+                  <span>Option A: Verify via EVC (Aadhaar / Mobile OTP)</span>
+                </span>
+                <span class="block text-xs text-slate-500 mt-1">Recommended for shopkeepers. Instant 6-digit OTP sent to registered mobile number (+91 98*****321).</span>
+              </div>
+            </label>
+
+            <label class="p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-400 cursor-pointer flex items-start space-x-3">
+              <input type="radio" name="verify-mode" id="radio-dsc" value="DSC" class="mt-1 text-gst-navy">
+              <div>
+                <span class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                  <i class="fa-solid fa-signature text-purple-600"></i>
+                  <span>Option B: Verify with Digital Signature (DSC)</span>
+                </span>
+                <span class="block text-xs text-slate-500 mt-1">For companies/LLP or taxpayers with Class 3 USB Crypto Token inserted.</span>
+              </div>
+            </label>
+
+          </div>
+
+          <!-- PANE A: EVC OTP UI -->
+          <div id="verification-pane-evc" class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-4 max-w-md mx-auto text-center">
+            <div class="w-12 h-12 rounded-full bg-blue-100 text-gst-navy flex items-center justify-center text-xl mx-auto">
+              <i class="fa-solid fa-key"></i>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-slate-800">Enter 6-Digit OTP</div>
+              <div class="text-[11px] text-slate-500">OTP dispatched to registered mobile: +91 98*****321</div>
+            </div>
+
+            <div class="flex justify-center">
+              <input 
+                type="text" 
+                id="evc-otp-input" 
+                maxlength="6" 
+                placeholder="739201" 
+                class="w-48 text-center text-xl font-mono font-bold tracking-widest py-2 bg-white border-2 border-gst-navy rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+              >
+            </div>
+
+            <div class="flex items-center justify-center space-x-3 text-xs">
+              <button onclick="fillDemoOtp()" class="text-amber-700 hover:underline font-bold text-[11px]">
+                <i class="fa-solid fa-bolt mr-1"></i>Auto Fill Demo OTP
+              </button>
+              <span class="text-slate-300">|</span>
+              <button onclick="showToast('New OTP re-sent to mobile', 'info')" class="text-slate-500 hover:text-slate-800 text-[11px]">
+                Resend OTP (54s)
+              </button>
+            </div>
+
+            <button onclick="actionVerifyEVC()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition shadow flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-shield-check"></i>
+              <span>Verify & Complete Return Filing</span>
+            </button>
+          </div>
+
+          <!-- PANE B: DSC UI -->
+          <div id="verification-pane-dsc" class="hidden p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-4 max-w-md mx-auto text-center">
+            <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-800 flex items-center justify-center text-xl mx-auto">
+              <i class="fa-solid fa-usb"></i>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-slate-800">Crypto Token Detected</div>
+              <div class="text-[11px] text-slate-500">ePass2003 Token - Class 3 Signing Certificate</div>
+            </div>
+
+            <div class="p-3 bg-white rounded border border-slate-200 text-left text-xs space-y-1">
+              <div><strong>Signer:</strong> Tejas Sharma (Authorized Signatory)</div>
+              <div><strong>Issuer:</strong> e-Mudhra Sub-CA 2026</div>
+              <div><strong>PAN:</strong> ABCDE1234F</div>
+            </div>
+
+            <button id="btn-sign-dsc" onclick="actionVerifyDSC()" class="w-full py-2.5 bg-purple-700 hover:bg-purple-800 text-white rounded-lg text-xs font-bold transition shadow flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-signature"></i>
+              <span>Sign with Certificate & File</span>
+            </button>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <button onclick="goToWizardStep(6)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">
+              <i class="fa-solid fa-arrow-left mr-1"></i>Back
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= STEP 8: ACKNOWLEDGEMENT (SUCCESS & ARN) ================= -->
+        <div id="wizard-step-content-8" class="wizard-pane hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+          
+          <!-- Celebration Banner -->
+          <div class="text-center space-y-2 py-4">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto animate-bounce">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="text-xl font-black text-slate-900">Return Filed Successfully!</h3>
+            <p class="text-xs text-slate-600 max-w-md mx-auto">
+              Your GST return for period <strong>October 2026</strong> has been legally validated and submitted to the Goods & Services Tax Network (GSTN).
+            </p>
+          </div>
+
+          <!-- Official Receipt Card -->
+          <div id="printable-receipt-modal" class="max-w-xl mx-auto border-2 border-emerald-500 rounded-2xl p-6 bg-emerald-50/20 shadow-sm space-y-4 text-xs">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-emerald-200">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                <span class="font-extrabold text-slate-900 uppercase">GST Filing Acknowledgement Receipt</span>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-600 text-white">FILED</span>
+            </div>
+
+            <!-- ARN Number Box -->
+            <div class="bg-white p-4 rounded-xl border border-emerald-300 text-center space-y-1 shadow-sm">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-center gap-1">
+                <span>Application Reference Number (ARN)</span>
+                <div class="tooltip-container">
+                  <i class="fa-solid fa-circle-question text-slate-400 text-xs"></i>
+                  <div class="tooltip-box">
+                    <strong>ARN:</strong> Official 15-character statutory reference code confirming your tax return was received by the GST portal.
+                  </div>
+                </div>
+              </div>
+              <div id="ack-arn-number" class="text-2xl font-mono font-black text-gst-navy tracking-wider select-all">
+                AA2710260084591
+              </div>
+              <div class="text-[11px] text-slate-500">Timestamp: <span id="ack-timestamp" class="font-semibold text-slate-800">31-Oct-2026, 23:55:12</span></div>
+            </div>
+
+            <!-- Taxpayer info -->
+            <div class="grid grid-cols-2 gap-3 bg-white p-3.5 rounded-xl border border-slate-200 text-slate-700">
+              <div><strong>Trade Name:</strong> <span id="ack-trade-name">Apex Mobile Accessories</span></div>
+              <div><strong>GSTIN:</strong> <span id="ack-gstin" class="font-mono">27ABCDE1234F1Z5</span></div>
+              <div><strong>Period:</strong> <span id="ack-period">October 2026 (2026-27)</span></div>
+              <div><strong>Verification:</strong> <span id="ack-method">EVC (OTP)</span></div>
+              <div><strong>Total Output Tax:</strong> <span id="ack-total-tax" class="font-bold">₹18,000.00</span></div>
+              <div><strong>ITC Offset:</strong> <span id="ack-itc" class="font-bold text-emerald-700">₹9,000.00</span></div>
+              <div class="col-span-2 pt-1 border-t border-slate-100 flex justify-between font-bold text-slate-900">
+                <span>Cash Tax Paid:</span>
+                <span id="ack-cash-paid" class="text-gst-navy">₹9,000.00</span>
+              </div>
+            </div>
+
+            <div class="text-center text-[10px] text-slate-500">
+              This is a computer generated statutory acknowledgement receipt and does not require physical signature.
+            </div>
+
+          </div>
+
+          <!-- Action buttons -->
+          <div class="flex flex-wrap items-center justify-center gap-3 pt-4 border-t border-slate-100">
+            <button onclick="downloadReceiptPDF()" class="px-5 py-2.5 bg-gst-navy hover:bg-gst-dark text-white rounded-lg text-xs font-bold transition shadow flex items-center space-x-2">
+              <i class="fa-solid fa-download"></i>
+              <span>Download Printable Receipt (PDF)</span>
+            </button>
+            <button onclick="switchMainModule('dashboard')" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition shadow flex items-center space-x-2">
+              <i class="fa-solid fa-house"></i>
+              <span>Return to Business Dashboard</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-white border-t border-slate-200 text-xs text-slate-500 py-6 mt-12 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+        <span class="font-semibold text-slate-700">Simplified GST Return Portal</span>
+        <span>• Designed for Small Businesses & Shopkeepers</span>
+      </div>
+      <div>
+        <span>Goods and Services Tax Network (GSTN) • Version 4.8.2 Live</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING TOAST NOTIFICATION CONTAINER ================= -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none max-w-sm w-full no-print"></div>
+
+  <!-- Portal Logic Script -->
+  <script src="js/portal.js"></script>
+
+</body>
+</html>
